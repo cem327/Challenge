@@ -1,4 +1,4 @@
-# INFO
+# Hakkında
 
 Bu repo bilişim sektöründeki bir firmanın isteği üzerine yaratılmıştır.
 
