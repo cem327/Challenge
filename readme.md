@@ -26,20 +26,20 @@ Aşağıda, projede bulunan servisler ve bu servislerin sağladığı endpoint'l
 
 - **AddCustomer**: Yeni müşteri eklemek için kullanılan servis.
     - POST /customers
-- **GetProduct**: Ürün bilgilerini almak için kullanılan servis.
-    - GET /products/{productId}
-- **CreateProduct**: Yeni ürün eklemek için kullanılan servis.
-    - POST /products
-- **UpdateProduct**: Ürün bilgilerini güncellemek için kullanılan servis.
-    - PUT /products/{productId}
-- **DeleteProduct**: Ürünü silmek için kullanılan servis.
-    - DELETE /products/{productId}
-- **GetCart**: Müşterinin sepetini almak için kullanılan servis.
-    - GET /carts/{customerId}
-- **UpdateCart**: Müşterinin sepetini güncellemek için kullanılan servis.
-    - PUT /carts/{customerId}
-- **EmptyCart**: Müşterinin sepetini boşaltmak için kullanılan servis.
-    - DELETE /carts/{customerId}
+        - **GetProduct**: Ürün bilgilerini almak için kullanılan servis.
+          - GET /products/{productId}
+        - **CreateProduct**: Yeni ürün eklemek için kullanılan servis.
+            - POST /products
+        - **UpdateProduct**: Ürün bilgilerini güncellemek için kullanılan servis.
+            - PUT /products/{productId}
+        - **DeleteProduct**: Ürünü silmek için kullanılan servis.
+            - DELETE /products/{productId}
+        - **GetCart**: Müşterinin sepetini almak için kullanılan servis.
+            - GET /carts/{customerId}
+        - **UpdateCart**: Müşterinin sepetini güncellemek için kullanılan servis.
+            - PUT /carts/{customerId}
+      - **EmptyCart**: Müşterinin sepetini boşaltmak için kullanılan servis.
+          - DELETE /carts/{customerId}
 - **PlaceOrder**: Yeni sipariş oluşturmak için kullanılan servis.
     - POST /orders
 - **GetOrderForCode**: Belirli bir sipariş koduna sahip siparişi almak için kullanılan servis.
