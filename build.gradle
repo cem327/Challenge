@@ -48,7 +48,6 @@ allprojects {
     dependencies {
         implementation libs.springBootWeb
         implementation libs.springBootJpa
-        implementation libs.postgresql
         annotationProcessor libs.lombok
         implementation libs.lombok
         implementation libs.openApi
