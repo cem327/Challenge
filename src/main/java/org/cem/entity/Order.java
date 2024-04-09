@@ -10,19 +10,13 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-
-import static org.cem.utility.enums.Status.PENDING;
-import static org.cem.utility.enums.Status.PLACED;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name="tbl_order")
+@Entity(name = "tbl_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,17 +25,31 @@ public class Order {
     private LocalDate orderDate;
     @Enumerated(value = EnumType.STRING)
     private Status status;
-    @ManyToOne
-    private Customer customer;
+    private Long customerId;
     @ElementCollection
-    private List<Long> cartOrderIds;
+    private List<Long> productOrderIds;
     private Double totalPrice;
 
-    @Temporal(TemporalType.DATE)
-    @CreatedDate
-    private LocalDate createdDate;
-    @Temporal(TemporalType.DATE)
-    @LastModifiedDate
-    private LocalDate modifiedDate;
 
+    @CreatedDate
+    @Builder.Default
+    private Long createdAt = System.currentTimeMillis();
+    @LastModifiedDate
+    @Builder.Default
+    private Long updatedAt = System.currentTimeMillis();
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderDate=" + orderDate +
+                ", status=" + status +
+                ", customer (ID) =" + customerId +
+                " - WARNING: Circular reference omitted" +
+                ", cartOrderIds=" + productOrderIds +
+                ", totalPrice=" + totalPrice +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

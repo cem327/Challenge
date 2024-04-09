@@ -15,7 +15,6 @@ ext {
             postgresql                        : "org.postgresql:postgresql:${versions.postgresql}",
             lombok                            : "org.projectlombok:lombok:${versions.lombok}",
             openApi                           : "org.springdoc:springdoc-openapi-starter-webmvc-ui:${versions.openApi}",
-            mapStruct                         : "org.mapstruct:mapstruct:${versions.mapStruct}",
             mapStructProcessor                : "org.mapstruct:mapstruct-processor:${versions.mapStruct}",
             h2                                : "com.h2database:h2:${versions.h2}",
     ]

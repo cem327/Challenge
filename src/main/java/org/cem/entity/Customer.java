@@ -5,19 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name="tbl_customer")
+@Entity(name = "tbl_customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +22,31 @@ public class Customer {
     private String name;
     private String email;
     private String password;
-    @OneToOne
-    private Cart cart;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private Long cartId;
+    @ElementCollection
+    private List<Long> orderIds;
 
-    @Temporal(TemporalType.DATE)
+
     @CreatedDate
-    private LocalDate createdDate;
-    @Temporal(TemporalType.DATE)
+    @Builder.Default
+    private Long createdAt = System.currentTimeMillis();
     @LastModifiedDate
-    private LocalDate modifiedDate;
+    @Builder.Default
+    private Long updatedAt = System.currentTimeMillis();
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", cart (ID)=" + cartId +
+                ", orderIds=" + orderIds +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
+
 }

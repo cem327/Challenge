@@ -1,31 +1,36 @@
 package org.cem.service;
 
-import jakarta.transaction.Transactional;
-import org.cem.entity.Cart;
-import org.cem.entity.Product;
-import org.cem.entity.Cart_Order;
-import org.cem.entity.Order;
+import lombok.extern.slf4j.Slf4j;
+import org.cem.entity.*;
 import org.cem.repository.OrderRepository;
 import org.cem.utility.ServiceManager;
 import org.cem.utility.enums.Status;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class OrderService extends ServiceManager<Order, Long> {
 
     private final OrderRepository orderRepository;
-    private final Cart_OrderService cart_orderService;
+    private final Product_OrderService product_orderService;
     private final CartService cartService;
     private final ProductService productService;
+    private final CustomerService customerService;
 
-    public OrderService(OrderRepository orderRepository, Cart_OrderService cart_orderService, CartService cartService, ProductService productService) {
+    public OrderService(OrderRepository orderRepository,
+                        Product_OrderService product_orderService,
+                        CartService cartService,
+                        ProductService productService,
+                        CustomerService customerService) {
         super(orderRepository);
         this.orderRepository = orderRepository;
-        this.cart_orderService = cart_orderService;
+        this.product_orderService = product_orderService;
         this.cartService = cartService;
         this.productService = productService;
+        this.customerService = customerService;
     }
 
     /**
@@ -35,36 +40,49 @@ public class OrderService extends ServiceManager<Order, Long> {
      * @param cartId - cart id
      * @return - order
      */
-    @Transactional
     public Order startOrderProcess(Long cartId) {
+
         Cart cart = cartService.findById(cartId).orElseThrow(() -> new RuntimeException("Cart not found"));
+
         Double totalPrice = cartService.calculateTotalPrice(cartId);
+        Customer customer = customerService.findByCartId(cartId);
+
         Order savedOrder = orderRepository.save(Order.builder()
                 .totalPrice(totalPrice)
                 .status(Status.PENDING)
-                .customer(cart.getCustomer())
+                .customerId(customer.getId())
+                .productOrderIds(new ArrayList<>())
                 .build());
+
         cartService.getProductCartPairsByCartId(cartId).forEach(productCart -> {
-            cart_orderService.save(Cart_Order.builder()
+            Product product = productService.findById(productCart.getProductId()).orElseThrow(() -> new RuntimeException("Product not found"));
+
+            Product_Order cartOrder = product_orderService.save(Product_Order.builder()
                     .orderId(savedOrder.getId())
                     .productId(productCart.getProductId())
                     .quantity(productCart.getQuantity())
+                    .price(product.getPrice())
                     .build());
+            savedOrder.getProductOrderIds().add(cartOrder.getId());
 
-            Product product = productService.findById(productCart.getProductId()).orElseThrow(() -> new RuntimeException("Product not found"));
             product.setCurrentStock(product.getCurrentStock() - productCart.getQuantity());
             productService.save(product);
 
         });
 
-        return savedOrder;
+        // Customer will be updated with order.
+        customer.getOrderIds().add(savedOrder.getId());
+        customerService.update(customer);
+
+
+        return orderRepository.save(savedOrder);
     }
 
-    public void placeOrder(Long orderId) {
-       Order order = getOrderForCode(orderId);
-       order.setStatus(Status.PLACED);
-
-       orderRepository.save(order);
+    public Order placeOrder(Long orderId) {
+        Order order = getOrderForCode(orderId);
+        order.setStatus(Status.PLACED);
+        order.setOrderDate(java.time.LocalDate.now());
+        return orderRepository.save(order);
     }
 
     public Order getOrderForCode(Long id) {

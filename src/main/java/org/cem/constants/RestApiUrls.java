@@ -3,12 +3,13 @@ package org.cem.constants;
 public class RestApiUrls {
 
     public static final String VERSION = "api/v1";
-    public static final String DEV = "dev";
+    public static final String DEV = "/dev";
     public static final String ROOT = VERSION + DEV;
     public static final String CUSTOMER = ROOT + "/customer";
     public static final String PRODUCT = ROOT + "/product";
     public static final String CART = ROOT + "/cart";
     public static final String ORDER = ROOT + "/order";
+    public static final String DATA = ROOT + "/data";
 
 
     public static final String ADD_CUSTOMER = "/add-customer";
@@ -25,4 +26,7 @@ public class RestApiUrls {
     public static final String ADD_PRODUCT_TO_CART = "/add-product-to-cart";
     public static final String REMOVE_PRODUCT_FROM_CART = "/remove-product-from-cart";
     public static final String START_ORDER_PROCESS = "/start-order-process";
+    public static final String CREATE_SAMPLE_DATA = "/create-sample-data";
+    public static final String GET_CART_ITEMS = "/get-cart-items";
+    public static final String GET_ALL_PRODUCT_CARTS = "/get-all-product-cards";
 }

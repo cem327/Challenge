@@ -52,8 +52,6 @@ allprojects {
         annotationProcessor libs.lombok
         implementation libs.lombok
         implementation libs.openApi
-        implementation libs.mapStruct
-        implementation libs.mapStructProcessor
         testImplementation libs.h2
 
     }

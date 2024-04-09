@@ -1,15 +1,15 @@
 package org.cem.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,11 +25,10 @@ public class Product_Cart {
     private Long productId;
     private Integer quantity;
 
-
-    @Temporal(TemporalType.DATE)
     @CreatedDate
-    private LocalDate createdDate;
-    @Temporal(TemporalType.DATE)
+    @Builder.Default
+    private Long createdAt = System.currentTimeMillis();
     @LastModifiedDate
-    private LocalDate modifiedDate;
+    @Builder.Default
+    private Long updatedAt = System.currentTimeMillis();
 }

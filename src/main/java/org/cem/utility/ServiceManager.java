@@ -43,6 +43,11 @@ public class ServiceManager<T, ID> implements IService<T, ID> {
     }
 
     @Override
+    public void deleteAll(Iterable<T> t) {
+        repository.deleteAll(t);
+    }
+
+    @Override
     public List<T> findAll() {
         return repository.findAll();
     }

@@ -1,10 +1,9 @@
 package org.cem.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.cem.dto.request.ProductCreateProductRequestDto;
-import org.cem.entity.Order;
 import org.cem.entity.Product;
 import org.cem.repository.ProductRepository;
-import org.cem.repository.Product_CartRepository;
 import org.cem.utility.ServiceManager;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +11,10 @@ import org.springframework.stereotype.Service;
 public class ProductService extends ServiceManager<Product, Long> {
 
     private final ProductRepository productRepository;
-    private final Product_CartService productCartService;
 
-    public ProductService(ProductRepository productRepository, Product_CartService productCartService) {
+    public ProductService(ProductRepository productRepository) {
         super(productRepository);
         this.productRepository = productRepository;
-        this.productCartService = productCartService;
     }
 
     public Product getProduct(Long id) {
@@ -28,9 +25,16 @@ public class ProductService extends ServiceManager<Product, Long> {
     public Product createProduct(ProductCreateProductRequestDto dto) {
 
         return productRepository.save(Product.builder()
-                        .name(dto.getName())
-                        .price(dto.getPrice())
-                        .currentStock(dto.getCurrentStock())
-                        .build());
+                .name(dto.getName())
+                .price(dto.getPrice())
+                .currentStock(dto.getCurrentStock())
+                .build());
     }
+
+    public Product findProductByIdElseThrowException(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+    }
+
+
 }

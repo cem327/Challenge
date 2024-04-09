@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -20,19 +19,25 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Customer customer;
+    private Long customerId;
     @Builder.Default
     private Double totalPrice = 0.0;
     @ElementCollection
     private List<Long> productCartIds;
 
 
-    @Temporal(TemporalType.DATE)
     @CreatedDate
-    private LocalDate createdDate;
-    @Temporal(TemporalType.DATE)
+    @Builder.Default
+    private Long createdAt = System.currentTimeMillis();
     @LastModifiedDate
-    private LocalDate modifiedDate;
+    @Builder.Default
+    private Long updatedAt = System.currentTimeMillis();
+
+
+    @Override
+    public String toString() {
+        return "Cart{" + "id=" + id + ", totalPrice=" + totalPrice + ", productCartIds=" + productCartIds + ", createdDate=" + createdAt + ", modifiedDate=" + updatedAt + '}';
+
+    }
 
 }
