@@ -1,15 +1,14 @@
 # Hakkında
 
-Bu repo bilişim sektöründeki bir firmanın isteği üzerine yaratılmıştır.
+Bilişim sektöründeki bir firmanın isteği üzerine yaratılmıştır.
 
+## Açıklama
 
-## KISA AÇIKLAMA
-
-Projede, hizli kullanim için h2 database entegre edilmiştir. (localhost:8080/h2-console)
-Projede, Swagger kullanılmış olup end-pointlerin kolay bir şekilde denenmesi amaçlanmıştır.
-Aynı zamanda Data Controller'da örnek data örneği oluşturmak için bir endpoint'e yer verilmiştir.
-İlişkiler, geliştirmenin kolay sağlanabilmesi adına çok sıkı yapılmamıştır.
-Özelleştirilmiş istisnalara yer verilmemiştir.
+- Projede, hizli kullanim için h2 database entegre edilmiştir. (localhost:8080/h2-console)
+- Swagger kullanılmış olup end-pointlerin kolay bir şekilde denenmesi amaçlanmıştır.
+- Aynı zamanda Data Controller'da örnek data örneği oluşturmak için bir endpoint'e yer verilmiştir.
+- İlişkiler, geliştirmenin kolay sağlanabilmesi adına çok sıkı yapılmamıştır.
+- Özelleştirilmiş istisnalara yer verilmemiştir.
 
 # Spring Boot E-Ticaret Projesi
 
