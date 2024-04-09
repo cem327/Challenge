@@ -2,17 +2,18 @@
 
 Bu repo bilişim sektöründeki bir firmanın isteği üzerine yaratılmıştır.
 
-# Spring Boot E-Ticaret Projesi
-
-Bu proje, bir e-ticaret platformu için Spring Boot kullanarak geliştirilmiş bir projedir. Projede, müşterilerin ürünleri sepete ekleyebilmesi, sipariş verebilmesi ve sipariş geçmişini görüntüleyebilmesi gibi temel işlevler bulunmaktadır. Ayrıca, ürün fiyatları güncellendiğinde geçmişe yönelik fiyat bilgilerinin saklanması ve stok takibi yapılması gibi özellikler de bulunmaktadır.
 
 ## KISA AÇIKLAMA
 
-Projede, hizli kullanim için h2 database entegre edilmiştir.
+Projede, hizli kullanim için h2 database entegre edilmiştir. (localhost:8080/h2-console)
+Projede, Swagger kullanılmış olup end-pointlerin kolay bir şekilde denenmesi amaçlanmıştır.
 Aynı zamanda Data Controller'da örnek data örneği oluşturmak için bir endpoint'e yer verilmiştir.
 İlişkiler, geliştirmenin kolay sağlanabilmesi adına çok sıkı yapılmamıştır.
 Özelleştirilmiş istisnalara yer verilmemiştir.
-Projede, Swagger kullanılmış olup end-pointlerin kolay bir şekilde denenmesi amaçlanmıştır.
+
+# Spring Boot E-Ticaret Projesi
+
+Bu proje, e-ticaret platformu için Spring Boot kullanarak geliştirilmiş bir projedir. Projede, müşterilerin ürünleri sepete ekleyebilmesi, sipariş verebilmesi ve sipariş geçmişini görüntüleyebilmesi gibi temel işlevler bulunmaktadır. Ayrıca, ürün fiyatları güncellendiğinde geçmişe yönelik fiyat bilgilerinin saklanması ve stok takibi yapılması gibi özellikler de bulunmaktadır
 
 ## Proje Yapısı
 
