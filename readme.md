@@ -1,57 +1,52 @@
 # Hakkında
 
-Bilişim sektöründeki bir firmanın isteği üzerine yaratılmıştır.
+Bu proje, bilişim sektöründeki bir firmanın isteği üzerine yaratılmıştır. Aşağıdaki açıklamalar proje hakkında temel bilgiler içermektedir:
 
-## Açıklama
-
-- Projede, hizli kullanim için h2 database entegre edilmiştir. (localhost:8080/h2-console)
-- Swagger kullanılmış olup end-pointlerin kolay bir şekilde denenmesi amaçlanmıştır.
-- Aynı zamanda Data Controller'da örnek data örneği oluşturmak için bir endpoint'e yer verilmiştir.
+- Projede, hızlı kullanım için h2 database entegre edilmiştir. (`localhost:8080/h2-console`)
+- Swagger kullanılmış olup, endpointlerin kolay bir şekilde denenmesi amaçlanmıştır.
+- Data Controller'da örnek veri oluşturmak için bir endpoint'e yer verilmiştir.
 - İlişkiler, geliştirmenin kolay sağlanabilmesi adına çok sıkı yapılmamıştır.
 - Özelleştirilmiş istisnalara yer verilmemiştir.
 
-# Spring Boot E-Ticaret Projesi
+## Spring Boot E-Ticaret Projesi
 
-Bu proje, e-ticaret platformu için Spring Boot kullanarak geliştirilmiş bir projedir. Projede, müşterilerin ürünleri sepete ekleyebilmesi, sipariş verebilmesi ve sipariş geçmişini görüntüleyebilmesi gibi temel işlevler bulunmaktadır. Ayrıca, ürün fiyatları güncellendiğinde geçmişe yönelik fiyat bilgilerinin saklanması ve stok takibi yapılması gibi özellikler de bulunmaktadır
+Bu proje, e-ticaret platformu için Spring Boot kullanarak geliştirilmiş bir projedir. Projede, müşterilerin ürünleri sepete ekleyebilmesi, sipariş verebilmesi ve sipariş geçmişini görüntüleyebilmesi gibi temel işlevler bulunmaktadır. Ayrıca, ürün fiyatları güncellendiğinde geçmişe yönelik fiyat bilgilerinin saklanması ve stok takibi yapılması gibi özellikler de bulunmaktadır.
 
-## Proje Yapısı
+## EndPointler
 
-Proje, aşağıdaki bileşenleri içermektedir:
-- **Product Service**: Ürünlerin eklenmesi, güncellenmesi, silinmesi ve görüntülenmesi işlemlerini gerçekleştiren servisler.
-- **Customer Service**: Müşteri yönetimi için kullanılan servisler.
-- **Cart Service**: Sepet yönetimi için kullanılan servisler.
-- **Order Service**: Sipariş yönetimi için kullanılan servisler.
+Aşağıdaki endpointler API'nin kullanımını sağlar:
 
-## Servisler ve Kullanılan Endpoint'ler
+### Müşteri İşlemleri
 
-Aşağıda, projede bulunan servisler ve bu servislerin sağladığı endpoint'ler listelenmiştir:
+- **Müşteri Ekleme**: `POST /api/v1/dev/customer/add-customer`
 
-- **AddCustomer**: Yeni müşteri eklemek için kullanılan servis.
-- POST /customers
-- **GetProduct**: Ürün bilgilerini almak için kullanılan servis.
-    - GET /products/{productId}
-- **CreateProduct**: Yeni ürün eklemek için kullanılan servis.
-    - POST /products
-- **UpdateProduct**: Ürün bilgilerini güncellemek için kullanılan servis.
-    - PUT /products/{productId}
-- **DeleteProduct**: Ürünü silmek için kullanılan servis.
-    - DELETE /products/{productId}
-- **GetCart**: Müşterinin sepetini almak için kullanılan servis.
-    - GET /carts/{customerId}
-- **UpdateCart**: Müşterinin sepetini güncellemek için kullanılan servis.
-    - PUT /carts/{customerId}
-- **EmptyCart**: Müşterinin sepetini boşaltmak için kullanılan servis.
-    - DELETE /carts/{customerId}
-- **PlaceOrder**: Yeni sipariş oluşturmak için kullanılan servis.
-    - POST /orders
-- **GetOrderForCode**: Belirli bir sipariş koduna sahip siparişi almak için kullanılan servis.
-    - GET /orders/{orderCode}
-- **GetAllOrdersForCustomer**: Bir müşteriye ait tüm siparişleri almak için kullanılan servis.
-    - GET /orders/customer/{customerId}
-- **AddProductToCart**: Sepete ürün eklemek için kullanılan servis.
-    - POST /carts/{customerId}/products
-- **RemoveProductFromCart**: Sepetten ürün çıkarmak için kullanılan servis.
-    - DELETE /carts/{customerId}/products/{productId}
+### Ürün İşlemleri
+
+- **Ürünleri Listeleme**: `GET /api/v1/dev/product/get-product`
+- **Ürün Oluşturma**: `POST /api/v1/dev/product/create-product`
+- **Ürün Güncelleme**: `PUT /api/v1/dev/product/update-product`
+- **Ürün Silme**: `DELETE /api/v1/dev/product/delete-product`
+- **Tüm Ürün Sepetlerini Getirme**: `GET /api/v1/dev/product/get-all-product-carts`
+
+### Sepet İşlemleri
+
+- **Sepeti Getirme**: `GET /api/v1/dev/cart/get-cart`
+- **Sepeti Güncelleme**: `PUT /api/v1/dev/cart/update-cart`
+- **Sepeti Boşaltma**: `DELETE /api/v1/dev/cart/empty-cart`
+- **Sepete Ürün Ekleme**: `POST /api/v1/dev/cart/add-product-to-cart`
+- **Sepetten Ürün Çıkarma**: `DELETE /api/v1/dev/cart/remove-product-from-cart`
+- **Sepet İçindeki Ürünleri Getirme**: `GET /api/v1/dev/cart/get-cart-items`
+
+### Sipariş İşlemleri
+
+- **Sipariş Koduna Göre Siparişi Getirme**: `GET /api/v1/dev/order/get-order-for-code`
+- **Sipariş Oluşturma**: `POST /api/v1/dev/order/place-order`
+- **Bir Müşteriye Ait Tüm Siparişleri Getirme**: `GET /api/v1/dev/order/get-all-orders-for-customer`
+- **Sipariş İşlemini Başlatma**: `POST /api/v1/dev/order/start-order-process`
+
+### Data İşlemleri
+
+- **Örnek Veri Oluşturma**: `GET /api/v1/dev/data/create-sample-data`
 
 ## Kullanılan Teknolojiler
 
@@ -61,5 +56,5 @@ Proje, aşağıdaki teknolojileri ve kütüphaneleri kullanmaktadır:
 - **Spring Data JPA**: Veritabanı işlemlerini kolaylaştırmak için kullanılan bir Spring modülü.
 - **Spring Web**: Web tabanlı uygulamalar geliştirmek için kullanılan bir Spring modülü.
 - **Hibernate**: Veritabanı işlemlerini yönetmek için kullanılan bir ORM (Object-Relational Mapping) aracı.
-- **PostgreSQL**: Veritabanı olarak kullanılan ilişkisel bir veritabanı yönetim sistemi.
-
+- **Lombok**: Java için bir kütüphane, tekrarlayıcı kodu azaltmak ve sınıf dosyalarını daha okunabilir hale getirmek için kullanılır.
+- **h2**: Veritabanı olarak kullanılan ilişkisel bir veritabanı yönetim sistemi.
